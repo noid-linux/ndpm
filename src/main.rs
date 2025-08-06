@@ -1,4 +1,5 @@
 use clap::Parser;
+use colored::Colorize;
 use std::path::PathBuf;
 use zap_rs::{AppImage, PackageManager, Source, SourceMetadata};
 
@@ -45,7 +46,7 @@ async fn run() -> Result<()> {
 #[tokio::main]
 async fn main() {
     if let Err(e) = run().await {
-        eprintln!("Error: {e}");
+        eprintln!("{} {}", "Error:".red().bold(), e);
         std::process::exit(1);
     }
 }
