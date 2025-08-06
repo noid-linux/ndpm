@@ -6,3 +6,7 @@ authors = ["Naz <ndpm13@ch-naseem.com>"]
 description = "A user-friendly package manager wrapper for XBPS with AppImage support"
 repository = "https://git.ch-naseem.com/noid/ndpm"
 license = "MIT"
+
+[dependencies]
+clap = { version = "4.5.42", features = ["derive"] }
+zap-rs = { path = "../zap-rs" }
