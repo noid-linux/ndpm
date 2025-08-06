@@ -1,0 +1,8 @@
+[package]
+name = "ndpm"
+version = "0.1.0"
+edition = "2024"
+authors = ["Naz <ndpm13@ch-naseem.com>"]
+description = "A user-friendly package manager wrapper for XBPS with AppImage support"
+repository = "https://git.ch-naseem.com/noid/ndpm"
+license = "MIT"
