@@ -1,6 +1,6 @@
 use std::process::Command;
 
-use crate::{InstallArgs, RemoveArgs, Result, SearchArgs, UpgradeArgs};
+use crate::{Error, InstallArgs, RemoveArgs, Result, SearchArgs, UpgradeArgs};
 
 #[derive(Debug, Default)]
 pub struct Xbps {}
@@ -16,21 +16,29 @@ impl Xbps {
             options.push("-y");
         }
 
-        Command::new("sudo")
+        let status = Command::new("sudo")
             .arg("xbps-install")
             .args(options)
             .args(args.packages)
             .spawn()?
             .wait()?;
 
+        if !status.success() {
+            return Err(Error::XbpsFailed(status.code().unwrap_or(-1)));
+        }
+
         Ok(())
     }
     pub fn update(&self) -> Result<()> {
-        Command::new("sudo")
+        let status = Command::new("sudo")
             .arg("xbps-install")
             .arg("-S")
             .spawn()?
             .wait()?;
+
+        if !status.success() {
+            return Err(Error::XbpsFailed(status.code().unwrap_or(-1)));
+        }
 
         Ok(())
     }
@@ -42,7 +50,7 @@ impl Xbps {
         }
 
         // Upgrade xbps itself
-        Command::new("sudo")
+        let status = Command::new("sudo")
             .arg("xbps-install")
             .arg("-u")
             .args(&options)
@@ -50,13 +58,21 @@ impl Xbps {
             .spawn()?
             .wait()?;
 
-        Command::new("sudo")
+        if !status.success() {
+            return Err(Error::XbpsFailed(status.code().unwrap_or(-1)));
+        }
+
+        let status = Command::new("sudo")
             .arg("xbps-install")
             .arg("-u")
             .args(options)
             .args(args.packages)
             .spawn()?
             .wait()?;
+
+        if !status.success() {
+            return Err(Error::XbpsFailed(status.code().unwrap_or(-1)));
+        }
 
         Ok(())
     }
@@ -67,7 +83,7 @@ impl Xbps {
             options.push("-y");
         }
 
-        Command::new("sudo")
+        let status = Command::new("sudo")
             .arg("xbps-remove")
             .arg("-R")
             .args(options)
@@ -75,14 +91,22 @@ impl Xbps {
             .spawn()?
             .wait()?;
 
+        if !status.success() {
+            return Err(Error::XbpsFailed(status.code().unwrap_or(-1)));
+        }
+
         Ok(())
     }
     pub fn search(&self, args: SearchArgs) -> Result<()> {
-        Command::new("xbps-query")
+        let status = Command::new("xbps-query")
             .arg("-Rs")
             .arg(args.package)
             .spawn()?
             .wait()?;
+
+        if !status.success() {
+            return Err(Error::XbpsFailed(status.code().unwrap_or(-1)));
+        }
 
         Ok(())
     }
