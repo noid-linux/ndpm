@@ -2,11 +2,11 @@ use clap::Parser;
 use std::path::PathBuf;
 use zap_rs::{AppImage, PackageManager, Source, SourceMetadata};
 
-use ndpm::{Cli, Command, Xbps, is_root};
+use ndpm::{Cli, Command, Error, Result, Xbps, is_root};
 
-async fn run() -> Result<(), Box<dyn std::error::Error>> {
+async fn run() -> Result<()> {
     if is_root() {
-        return Err("Avoid running ndpm as root/sudo.".into());
+        return Err(Error::PermissionDenied);
     }
 
     let args = Cli::parse();

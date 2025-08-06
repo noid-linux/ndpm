@@ -9,5 +9,6 @@ license = "MIT"
 
 [dependencies]
 clap = { version = "4.5.42", features = ["derive"] }
+derive_more = { version = "2.0.1", features = ["from"] }
 tokio = { version = "1.47.1", features = ["full"] }
 zap-rs = { path = "../zap-rs" }

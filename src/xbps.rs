@@ -1,6 +1,6 @@
 use std::process::Command;
 
-use crate::{InstallArgs, RemoveArgs, SearchArgs, UpgradeArgs};
+use crate::{InstallArgs, RemoveArgs, Result, SearchArgs, UpgradeArgs};
 
 #[derive(Debug, Default)]
 pub struct Xbps {}
@@ -9,7 +9,7 @@ impl Xbps {
     pub fn new() -> Self {
         Self {}
     }
-    pub fn install(&self, args: InstallArgs) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn install(&self, args: InstallArgs) -> Result<()> {
         let mut options: Vec<&str> = vec![];
 
         if args.yes {
@@ -25,7 +25,7 @@ impl Xbps {
 
         Ok(())
     }
-    pub fn update(&self) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn update(&self) -> Result<()> {
         Command::new("sudo")
             .arg("xbps-install")
             .arg("-S")
@@ -34,7 +34,7 @@ impl Xbps {
 
         Ok(())
     }
-    pub fn upgrade(&self, args: UpgradeArgs) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn upgrade(&self, args: UpgradeArgs) -> Result<()> {
         let mut options: Vec<&str> = vec![];
 
         if args.yes {
@@ -60,7 +60,7 @@ impl Xbps {
 
         Ok(())
     }
-    pub fn remove(&self, args: RemoveArgs) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn remove(&self, args: RemoveArgs) -> Result<()> {
         let mut options: Vec<&str> = vec![];
 
         if args.yes {
@@ -77,7 +77,7 @@ impl Xbps {
 
         Ok(())
     }
-    pub fn search(&self, args: SearchArgs) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn search(&self, args: SearchArgs) -> Result<()> {
         Command::new("xbps-query")
             .arg("-Rs")
             .arg(args.package)

@@ -1,7 +1,9 @@
 mod args;
+mod error;
 mod xbps;
 
 pub use crate::args::*;
+pub use crate::error::*;
 pub use crate::xbps::*;
 
 pub fn is_root() -> bool {

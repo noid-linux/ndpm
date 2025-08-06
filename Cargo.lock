@@ -814,6 +814,7 @@ name = "ndpm"
 version = "0.1.0"
 dependencies = [
  "clap",
+ "derive_more",
  "tokio",
  "zap-rs",
 ]
