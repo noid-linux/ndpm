@@ -29,6 +29,13 @@ pub enum Command {
     /// Search for packages in repositories
     #[command(name = "search")]
     Search(SearchArgs),
+
+    /// Manage AppImages (alias: a, ai)
+    #[command(name = "appimage", aliases = ["a", "ai"])]
+    AppImage {
+        #[command(subcommand)]
+        action: zap_rs::Command,
+    },
 }
 
 #[derive(Debug, Args)]
@@ -66,4 +73,3 @@ pub struct SearchArgs {
     /// Package name or pattern to search for
     pub package: String,
 }
-

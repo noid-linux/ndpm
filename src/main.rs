@@ -16,6 +16,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Command::Upgrade(args) => xbps.upgrade(args)?,
         Command::Remove(args) => xbps.remove(args)?,
         Command::Search(args) => xbps.search(args)?,
+        Command::AppImage { action } => match action {
+            zap_rs::Command::Install(_) => todo!(),
+            zap_rs::Command::Remove(_) => todo!(),
+            zap_rs::Command::List => todo!(),
+        },
     }
 
     Ok(())
