@@ -1,8 +1,12 @@
 use clap::Parser;
 
-use ndpm::{Cli, Command, Xbps};
+use ndpm::{Cli, Command, Xbps, is_root};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    if is_root() {
+        return Err("Avoid running ndpm as root/sudo.".into());
+    }
+
     let args = Cli::parse();
     let xbps = Xbps::new();
 
