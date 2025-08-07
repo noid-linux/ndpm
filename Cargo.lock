@@ -2396,6 +2396,7 @@ dependencies = [
 [[package]]
 name = "zap-rs"
 version = "0.1.0"
+source = "git+https://github.com/ndpm13/zap-rs#75e49e6571cf991f36d3b0cab481f984afa51c44"
 dependencies = [
  "clap",
  "colored",
