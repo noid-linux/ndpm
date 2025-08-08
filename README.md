@@ -12,7 +12,7 @@ Noid Linux's Package Manger - A user-friendly package manager wrapper for XBPS w
 ## Installation
 
 ```bash
-cargo install --git https://git.ch-naseem.com/noid/ndpm
+cargo install ndpm
 ```
 
 ## Usage
