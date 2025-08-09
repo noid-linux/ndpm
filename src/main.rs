@@ -1,7 +1,6 @@
 use clap::Parser;
 use colored::Colorize;
-use std::path::PathBuf;
-use zap_rs::{AppImage, PackageManager, Source, SourceMetadata};
+use zap_rs::{AppImage, PackageManager};
 
 use ndpm::{Cli, Command, Error, Result, Xbps, is_root};
 
@@ -23,20 +22,9 @@ async fn run() -> Result<()> {
             let pm = PackageManager::new();
             match action {
                 zap_rs::Command::Install(args) => {
-                    let mut options = AppImage {
-                        file_path: PathBuf::new(),
-                        executable: args.executable.unwrap_or(args.appname.clone()),
-                        source: Source {
-                            identifier: if args.github {
-                                "git.github".to_string()
-                            } else {
-                                "raw_url".to_string()
-                            },
-                            meta: SourceMetadata { url: args.from },
-                        },
-                    };
+                    let mut appimage = AppImage::new(&args);
 
-                    pm.install(&mut options, &args.appname).await?;
+                    pm.install(&mut appimage, &args.appname).await?;
                 }
                 zap_rs::Command::Remove(args) => pm.remove(&args.appname).await?,
                 zap_rs::Command::List => pm.list().await?,
