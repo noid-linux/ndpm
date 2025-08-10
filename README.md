@@ -1,5 +1,7 @@
 # NDPM
 
+![Crates.io Version](https://img.shields.io/crates/v/ndpm) ![Crates.io Total Downloads](https://img.shields.io/crates/d/ndpm)
+
 Noid Linux's Package Manger - A user-friendly package manager wrapper for XBPS with built-in AppImage support.
 
 ## Features
