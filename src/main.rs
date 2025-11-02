@@ -26,6 +26,11 @@ async fn run() -> Result<()> {
 
                     pm.install(&mut appimage, &args.appname).await?;
                 }
+                zap_rs::Command::Update(args) => {
+                    let mut appimage = pm.index.get(&args.appname).await?;
+
+                    pm.update(&mut appimage).await?;
+                }
                 zap_rs::Command::Remove(args) => pm.remove(&args.appname).await?,
                 zap_rs::Command::List => pm.list().await?,
             }

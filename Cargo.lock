@@ -2336,9 +2336,9 @@ dependencies = [
 
 [[package]]
 name = "zap-rs"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "49b3b7519a8980666138f460cc9814cb92c880a676844643e4ce30ba1619368e"
+checksum = "2fe18df52d2016e85aba7a0cb14a332ad12fd28a6eae58b88a38e1a43ecd44a8"
 dependencies = [
  "clap",
  "colored",
