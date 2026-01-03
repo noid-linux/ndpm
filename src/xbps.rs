@@ -1,6 +1,8 @@
-use std::process::Command;
+use std::{io::Write, process::Command};
 
 use crate::{Error, InstallArgs, RemoveArgs, Result, SearchArgs, UpgradeArgs};
+
+const REPO: &str = "repository=https://github.com/noid-linux/xbps-repo/releases/latest/download";
 
 #[derive(Debug, Default)]
 pub struct Xbps {}
@@ -107,6 +109,21 @@ impl Xbps {
         if !status.success() {
             return Err(Error::XbpsFailed(status.code().unwrap_or(-1)));
         }
+
+        Ok(())
+    }
+    pub fn repo(&self) -> Result<()> {
+        let mut child = Command::new("sudo")
+            .arg("tee")
+            .arg("/etc/xbps.d/00-repository-noid.conf")
+            .stdin(std::process::Stdio::piped())
+            .spawn()?;
+
+        if let Some(mut stdin) = child.stdin.take() {
+            stdin.write_all(REPO.as_bytes())?;
+        }
+
+        child.wait()?;
 
         Ok(())
     }

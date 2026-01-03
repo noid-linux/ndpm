@@ -35,6 +35,7 @@ async fn run() -> Result<()> {
                 zap_rs::Command::List => pm.list().await?,
             }
         }
+        Command::Repo => xbps.repo()?,
     }
 
     Ok(())

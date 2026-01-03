@@ -36,6 +36,10 @@ pub enum Command {
         #[command(subcommand)]
         action: zap_rs::Command,
     },
+
+    /// Enable the Noid's custom repository
+    #[command(name = "repo")]
+    Repo,
 }
 
 #[derive(Debug, Args)]
