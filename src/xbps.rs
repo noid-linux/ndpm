@@ -2,7 +2,7 @@ use std::{io::Write, process::Command};
 
 use crate::{Error, InstallArgs, RemoveArgs, Result, SearchArgs, UpgradeArgs};
 
-const REPO: &str = "repository=https://github.com/noid-linux/xbps-repo/releases/latest/download";
+const REPO: &str = "repository=https://github.com/noid-linux/noid-packages/releases/latest/current";
 
 #[derive(Debug, Default)]
 pub struct Xbps {}
