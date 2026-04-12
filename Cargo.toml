@@ -1,0 +1,8 @@
+[package]
+name = "x"
+version = "0.3.0"
+authors = ["Naz <ndpm13@ch-naseem.com>"]
+edition = "2024"
+license = "BSD-2-Clause"
+
+[dependencies]
